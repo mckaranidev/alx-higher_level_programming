@@ -1,56 +1,40 @@
 #include "lists.h"
+#include <stdio.h>
 #include <stdlib.h>
-
+#include <stddef.h>
 /**
- * reverse_array - reverses the content of an array of integers
- * @a: int array to reverse
- * @n: number of elements in the array
- * Return: concatenated string
+ * is_palindrome - check if linked list is a palindrome
+ * @head: pointer to pointer to head of the list
+ * Return: 0 if it is not a palindrome, 1 if it is a palindrome
  */
-
-void reverse_array(int *a, int n)
-{
-        int *begin = a;
-        int *end;
-        int hold = 0;
-
-        end = a + n - 1;
-        for (; begin < end; begin++, end--)
-        {
-                hold = *end;
-                *end = *begin;
-                *begin = hold;
-        }
-}
-
-/**
- * is_palindrome - Return 1  if palindrome, 0 if not
- * @head: linked list
- * Return: Return 1  if palindrome, 0 if not
- */
-
 int is_palindrome(listint_t **head)
 {
-        int size, *list, *rev;
-        listint_t *copy = *head;
+	listint_t *temp = *head;
+	int size = sizeof(int);
+	int i = 1;
+	int left = 0;
+	int right = i - 1;
+	int *arr = malloc(100000 * sizeof(int));
 
-        if (!head || !copy)
-                return (0);
-        if (!copy->next)
-                return (1);
+	arr[0] = (*head)->n;
 
-        list = malloc(sizeof(int *));
-        if (!list)
-                return (0);
-        rev = malloc(sizeof(int *));
-        if (!rev)
-                return (0);
-        for (size = 0; copy; copy = copy->next, size++)
-                list[size] = copy->n;
+	if (*head == NULL)
+		return (1);
 
-        list = rev;
-        reverse_array(rev, size);
-        if (list == rev)
-                return (1);
-        return (0);
+	temp = temp->next;
+
+	while (temp != NULL)
+	{
+		size += sizeof(int);
+		arr = realloc(arr, size);
+		arr[i] = temp->n;
+		i++;
+		temp = temp->next;
+	}
+	for (; left < right; left++, right--)
+	{
+		if (arr[left] != arr[right])
+			return (0);
+	}
+	return (1);
 }
