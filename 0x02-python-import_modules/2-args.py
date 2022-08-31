@@ -12,4 +12,3 @@ if __name__ == "__main__":
         if (str == 0):
             continue
         print("{:d}: {:s}".format(str, sys.argv[str]))
-
