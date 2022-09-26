@@ -1,11 +1,13 @@
 #!/usr/bin/python3
+""" class MyInt that inherits from int """
+
+
 class MyInt(int):
-    """ Class that inherits from class int"""
 
     def __eq__(self, other):
-        """ Method that returns != check """
-        return int.__ne__(self, other)
+        """ equals change to not equals """
+        return super().__ne__(other)
 
     def __ne__(self, other):
-        """ Method that returns == check """
-        return int.__eq__(self, other)
+        """ not equals to equals """
+        return super().__eq__(other)
